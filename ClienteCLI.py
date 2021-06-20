@@ -8,13 +8,12 @@ PORTPOP3 = 110
 IPV  = socket.AF_INET
 TCP  = socket.SOCK_STREAM
 
-HELO= '192.168.0.9'
+
 MAILFROM= '<root@dns.inf3340.inf>'
 RCPT='<usuario@dns.inf3340.inf>'
 
 class ClienteCLI():
     def __init__(self, host,portsmtp,portpop3,ipv,tcp):
-        self.HELO= HELO
         self.MAILFROM= MAILFROM
         self.RCPT=RCPT
         self.host=host
@@ -241,7 +240,6 @@ class ClienteCLI():
     # estos parametros no deben modificarse en este contexto, solo estan creadas por motivos de practica
     # metodo para enviar mensaje, puede enviar un correo a multiples destinatarios, para ello solo es necesario
     # separar la direccion por comas, no existe problema con la presencia de espacios antes o despues. 
-    # @param: helo en este contexto por defecto es '192.168.0.9', en caso de cambiarse producirá error
     # @param: mailFrom en este contexto por defecto es '<root@dns.inf3340.inf>', en caso de cambiarse producirá error
     # @param: rcpt en este contexto por defecto es '<usuario@dns.inf3340.inf>', en caso de cambiarse producirá error
     # @param: subject es el titulo del mensaje
@@ -250,10 +248,8 @@ class ClienteCLI():
     # @param: mensaje es el texto que se enviará en el correo
     # @param: comprobacion es el codigo que discrimina con la respuesta del servidor el caso de exito del proceso
     # @return: string que indica que hubo un error o que el mensaje fue enviado exitosamente
-    def modoSMTP2(self, helo,mailFrom,rcpt,subject,fromText,toText,mensaje,comprobacion):
+    def modoSMTP2(self, mailFrom,rcpt,subject,fromText,toText,mensaje,comprobacion):
         # si no se modificaron asignandole valores, se utilizaran los valores por defectos que si funcionan
-        if len(helo)==0:
-            helo=self.HELO
         if len(mailFrom)==0:
             mailFrom=self.MAILFROM
         if len(rcpt)==0:
@@ -274,7 +270,7 @@ class ClienteCLI():
                     respuesta = self.recibir(soc)
                     if respuesta[:3] == "220":
                         print(respuesta)
-                        if self.enviarMensajeServidor(soc,"HELO " + helo, "250")[0]:
+                        if self.enviarMensajeServidor(soc,"HELO "+socket.gethostbyname('localhost'), "250")[0]:
                             if self.enviarMensajeServidor(soc,"MAIL FROM: "+ mailFrom, "250")[0]:
                                 if self.enviarMensajeServidor(soc, "RCPT TO: "+rcpt, "250")[0]:
                                     if self.enviarMensajeServidor(soc, "DATA", "354")[0]:

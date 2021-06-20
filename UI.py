@@ -22,7 +22,6 @@ class UI(QtWidgets.QMainWindow):
         self.userUlt=None
         self.passUlt=None
         self.infoDisponible=False
-        self.helo=''
         self.mailFrom=''
         self.rcpt=''
         self.textTotal.setText('Identificate...')
@@ -89,7 +88,6 @@ class UI(QtWidgets.QMainWindow):
         self.outputSMTP.setPlainText(self.OUTPUT_smtp)
     # actualiza los valores ingresados en la pestaña de configuracion para parametros extra de SMTP
     def loadExtraParametros(self):
-        self.helo=self.Texthelo.text()
         self.mailFrom=self.TextMailFrom.text()
         self.rcpt=self.TextRCPT.text()
     # Crea de uno a muchos correos, esta se llama al presionar el boton de enviar en pestaña Enviar correo
@@ -105,7 +103,7 @@ class UI(QtWidgets.QMainWindow):
             self.outputSMTP.setPlainText(self.OUTPUT_smtp)
             self.loadExtraParametros()
             #respuestServidor=self.cliente.modoSMTP(_subject_,_from_,_to_,_message_,"250")  # version sin configuracion extra
-            respuestServidor=self.cliente.modoSMTP2(self.helo,self.mailFrom,self.rcpt,_subject_,_from_,_to_,_message_,"250")
+            respuestServidor=self.cliente.modoSMTP2(self.mailFrom,self.rcpt,_subject_,_from_,_to_,_message_,"250")
             self.OUTPUT_smtp=self.OUTPUT_smtp+respuestServidor
             self.textSubject.setText('')
             self.textFrom.setText('')
