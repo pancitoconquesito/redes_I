@@ -69,7 +69,7 @@ class UI(QtWidgets.QMainWindow):
                     mensajeFinal[i]='\r|\t'+mensajeFinal[i]
                 mensajeFinal = "".join(mensajeFinal)
                 # formato terminado
-                textoFinal=infoExtra+'__________________________________________________\n\n'+'FROM : '+textoFinal[9]+'\n'+"Mesagge : \n "+mensajeFinal+'\n__________________________________________________\n'
+                textoFinal=infoExtra+'__________________________________________________\n\n'+'FROM : '+textoFinal[9]+'\n'+"-----[Mesagge]--------------------------------------- \n "+mensajeFinal+'\n__________________________________________________\n'+'__________________________________________________\n'
                 self.textMensajeFinal.setPlainText(textoFinal)
             except:
                 # en caso de error muestra el mensaje sin formato especifico
