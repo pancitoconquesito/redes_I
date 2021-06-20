@@ -1,0 +1,12 @@
+<RCC>
+  <qresource prefix="zel">
+    <file>1uHg.gif</file>
+    <file>gatoB.png</file>
+    <file>usuario.png</file>
+    <file>gatoUno.png</file>
+    <file>zelda.png</file>
+    <file>z1.png</file>
+    <file>z2.png</file>
+    <file>z3.png</file>
+  </qresource>
+</RCC>
